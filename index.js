@@ -157,34 +157,17 @@ function addIntern(){
 
 function writeOutput(){
 
+    if(!fs.existsSync(OUTPUT_DIR))
+    {
+        fs.mkdirSync(OUTPUT_DIR);
+        fs.writeFile(outputPath, render(team), (err) =>
+        err ? console.error(err) : console.log('File created successfully!'));
+    }
+    
+    else{
     fs.writeFile(outputPath, render(team), (err) =>
      err ? console.error(err) : console.log('File created successfully!'));
-
+    }
 }
 
-
-/*
-function addNewTeamMember(){
-inquirer.prompt([
-                 {
-                    type: "list",
-                    name:"addMember",
-                    message:"Do you like to add Engineer or Intern?:",
-                    choices:["Engineer","Intern","Exit"]
-
-                 }
-]).then(answer => {
-    if(answer.addMember === "Engineer"){
-        console.log(answer.addMember);
-    }
-    else if(answer.addMember === "Intern"){
-        console.log(answer.addMember);
-    }
-    else{
-        console.log("its a exit");
-    }
-})
-
-}
-*/
 init();
