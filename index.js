@@ -125,18 +125,43 @@ function addEngineer(){
         const engineer = new Engineer( answer.name,answer.id,answer.email, answer.github);
         team.push(engineer);
         addNewTeamMember();
-
   })  
 }
 
 function addIntern(){
-console.log("Adding Intern");
+    inquirer.prompt([
+      { type: "input",
+        name: "name",
+        message:"Enter Intern's name:"
+      },
+      {
+       type: "input",
+       name: "id",
+       message:"Enter Intern's id:"
+      },
+      {
+       type: "input",
+       name: "email",
+       message:"Enter Intern's Email-Id:"
+      },
+      {
+       type: "input",
+       name: "school",
+       message:"Enter Intern's school details:"
+      }
+
+    ])
+    .then(answer =>{
+        const intern = new Intern(answer.name,answer.id,answer.email,answer.school);
+        team.push(intern);
+        addNewTeamMember();
+
+    })
 }
 
 function exit(){
 console.log("exit");
 }
-
 
 
 /*
