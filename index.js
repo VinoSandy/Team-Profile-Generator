@@ -62,7 +62,7 @@ function addNewTeamMember(){
                     message:"Do you like to add new Team Member(Y/N):"
                     }])
     .then(response => {
-   if(response.check === true)
+   if(response.check === true)//If user response is true, gets type of team member
           {
             inquirer.prompt([
                     {
@@ -85,7 +85,7 @@ function addNewTeamMember(){
                     writeOutput();
                 }
        })                       
-    }
+    } //else invokes function to generate HTML page
      else
         {
           writeOutput();
@@ -93,7 +93,7 @@ function addNewTeamMember(){
 
     })
 }
-
+//Function to get Engineer details and creates engineer object
 function addEngineer(){
   inquirer.prompt([
                    { type: "input",
@@ -123,7 +123,7 @@ function addEngineer(){
         addNewTeamMember();
   })  
 }
-
+//Gets Intern details and creates Intern object.
 function addIntern(){
     inquirer.prompt([
       { type: "input",
@@ -154,7 +154,7 @@ function addIntern(){
 
     })
 }
-
+//Creates output directory if it is not exist and generates Team's HTML page.
 function writeOutput(){
 
     if(!fs.existsSync(OUTPUT_DIR))
@@ -170,4 +170,5 @@ function writeOutput(){
     }
 }
 
+//invokes init function to start.
 init();
