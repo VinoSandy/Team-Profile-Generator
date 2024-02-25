@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
+const { assertNewExpression } = require("@babel/types");
 
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
@@ -49,12 +50,7 @@ function addManagerDetails(){
                       },
 
 ]).then(answer =>{
-    const manager = new Manager(
-                        answer.name,
-                        answer.id,
-                        answer.email,
-                        answer.officeNumber
-                            );
+    const manager = new Manager(answer.name,answer.id,answer.email,answer.officeNumber);
       team.push(manager);                            
       addNewTeamMember(); 
 })
@@ -79,17 +75,19 @@ function addNewTeamMember(){
        
                        }])
             .then(answer => {
-                    if(answer.addMember === "Engineer"){
-
+                if(answer.addMember === "Engineer"){
+                   addEngineer();
                     console.log(answer.addMember);
                     }
-                 else if(answer.addMember === "Intern")
+                else if(answer.addMember === "Intern")
                  {
+                    addIntern();
                  console.log(answer.addMember);
                  }
-               else{
-               console.log("its a exit");
-               }
+                else{
+                    exit();
+                 console.log("its a exit");
+                }
        })                       
     }
      else
@@ -101,9 +99,43 @@ function addNewTeamMember(){
 }
 
 function addEngineer(){
-    
+  inquirer.prompt([
+                   { type: "input",
+                     name: "name",
+                     message:"Enter Engineer's name:"
+                   },
+                   {
+                    type: "input",
+                    name: "id",
+                    message:"Enter Engineer's id:"
+                   },
+                   {
+                    type: "input",
+                    name: "email",
+                    message:"Enter Engineer's Email-Id:"
+                   },
+                   {
+                    type: "input",
+                    name: "github",
+                    message:"Enter Engineer's GitHub user name:"
+                   }
+                   
+])
+  .then(answer => {
+        const engineer = new Engineer( answer.name,answer.id,answer.email, answer.github);
+        team.push(engineer);
+        addNewTeamMember();
+
+  })  
 }
 
+function addIntern(){
+console.log("Adding Intern");
+}
+
+function exit(){
+console.log("exit");
+}
 
 
 
