@@ -13,13 +13,15 @@ const render = require("./src/page-template.js");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
+//Array to hold all team member objects
 const team =[];
 
+//Function to invoke Manager Details
 function init(){
-
     addManagerDetails();
 }
 
+// Function to get Team Manager details
 function addManagerDetails(){
 
     inquirer.prompt([
@@ -49,15 +51,35 @@ function addManagerDetails(){
 ]).then(answer =>{
     const manager = new Manager(
                         answer.name,
-                         answer.id,
-                         answer.email,
-                          answer.officeNumber
+                        answer.id,
+                        answer.email,
+                        answer.officeNumber
                             );
       team.push(manager);                            
       console.log(team[0]);
+
+      addTeamMember(); 
 })
 }
 
+function addTeamMember(){
+
+    inquirer.prompt([
+                    {type:"confirm",
+                    name:"check",
+                    message:"Do you like to add new Team Member(Y/N):"
+                    }])
+    .then(response => {
+       if(response.check === true){
+         console.log("create function to add team member and invoke here")
+       }
+       else{
+         console.log("write the data to the file.")
+       }
+
+    })
+
+}
 
 
 init();
