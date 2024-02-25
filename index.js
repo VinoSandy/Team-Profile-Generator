@@ -9,8 +9,6 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
-const { assertNewExpression } = require("@babel/types");
-
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
@@ -55,7 +53,7 @@ function addManagerDetails(){
       addNewTeamMember(); 
 })
 }
-
+//Reads user response to add new team member or not
 function addNewTeamMember(){
 
     inquirer.prompt([
@@ -77,22 +75,20 @@ function addNewTeamMember(){
             .then(answer => {
                 if(answer.addMember === "Engineer"){
                    addEngineer();
-                    console.log(answer.addMember);
-                    }
+                 }
                 else if(answer.addMember === "Intern")
                  {
                     addIntern();
-                 console.log(answer.addMember);
+                 
                  }
                 else{
-                    exit();
-                 console.log("its a exit");
+                    writeOutput();
                 }
        })                       
     }
      else
         {
-          console.log("write the data to the file.");
+          writeOutput();
         }
 
     })
@@ -159,8 +155,11 @@ function addIntern(){
     })
 }
 
-function exit(){
-console.log("exit");
+function writeOutput(){
+
+    fs.writeFile(outputPath, render(team), (err) =>
+     err ? console.error(err) : console.log('File created successfully!'));
+
 }
 
 
