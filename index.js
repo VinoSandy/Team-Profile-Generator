@@ -56,13 +56,11 @@ function addManagerDetails(){
                         answer.officeNumber
                             );
       team.push(manager);                            
-      console.log(team[0]);
-
-      addTeamMember(); 
+      addNewTeamMember(); 
 })
 }
 
-function addTeamMember(){
+function addNewTeamMember(){
 
     inquirer.prompt([
                     {type:"confirm",
@@ -70,16 +68,67 @@ function addTeamMember(){
                     message:"Do you like to add new Team Member(Y/N):"
                     }])
     .then(response => {
-       if(response.check === true){
-         console.log("create function to add team member and invoke here")
-       }
-       else{
-         console.log("write the data to the file.")
-       }
+   if(response.check === true)
+          {
+            inquirer.prompt([
+                    {
+                           type: "list",
+                           name:"addMember",
+                           message:"Do you like to add Engineer or Intern?:",
+                           choices:["Engineer","Intern","Exit"]
+       
+                       }])
+            .then(answer => {
+                    if(answer.addMember === "Engineer"){
+
+                    console.log(answer.addMember);
+                    }
+                 else if(answer.addMember === "Intern")
+                 {
+                 console.log(answer.addMember);
+                 }
+               else{
+               console.log("its a exit");
+               }
+       })                       
+    }
+     else
+        {
+          console.log("write the data to the file.");
+        }
 
     })
+}
 
+function addEngineer(){
+    
 }
 
 
+
+
+/*
+function addNewTeamMember(){
+inquirer.prompt([
+                 {
+                    type: "list",
+                    name:"addMember",
+                    message:"Do you like to add Engineer or Intern?:",
+                    choices:["Engineer","Intern","Exit"]
+
+                 }
+]).then(answer => {
+    if(answer.addMember === "Engineer"){
+        console.log(answer.addMember);
+    }
+    else if(answer.addMember === "Intern"){
+        console.log(answer.addMember);
+    }
+    else{
+        console.log("its a exit");
+    }
+})
+
+}
+*/
 init();
