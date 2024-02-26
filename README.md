@@ -39,6 +39,9 @@
 
    The above screenshots shows how user is prompted for inputs to get teamdetails.
 
+   ![Generated TeamProfile Page](./assets/TeamProfile.png)
+    Generated Team Profile page.
+
 ## Usage:
    To use the application install package.json by cmd 'npm init' then install
    inquirer6.5.0 npm package and install jest to execute unit testing.
@@ -53,4 +56,4 @@
 
 ## GitHub Url:
    https://github.com/VinoSandy/Team-Profile-Generator.git
-   
+
